@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+title: Design of High-Speed 8-bit Vedic Multiplier using Brent-Kung Adders
+message: If you use this repository in academic work, please cite it.
+authors:
+  - family-names: Sai Kumar
+    given-names: Aruru
+  - family-names: Uttarwar
+    given-names: Siddhesh
+  - family-names: Sai Kiran
+    given-names: N.
+  - family-names: Bhavitha
+    given-names: K.
+doi: 10.1109/ICCCNT54827.2022.9984591
+repository-code: https://github.com/SiddheshUttarwar/vedic-multiplier-brent-kung-rtl
+license: MIT
+keywords:
+  - verilog
+  - vedic-multiplier
+  - brent-kung
+  - vlsi

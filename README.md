@@ -5,6 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![HDL](https://img.shields.io/badge/HDL-Verilog-orange)](#)
 [![CI](https://img.shields.io/badge/CI-Icarus%20Verilog-black)](.github/workflows/iverilog.yml)
+[![Hygiene](https://img.shields.io/badge/Repo-Hygiene-blue)](.github/workflows/repo-hygiene.yml)
 
 A compact, research-backed RTL implementation of an **8x8 unsigned Vedic multiplier** using the **Urdhva Tiryagbhyam** method and **Brent-Kung prefix addition** for improved speed.
 
@@ -109,6 +110,15 @@ The testbench `tb/tb_vedic8bit.v` is fully self-checking:
 - `Makefile`, `run_icarus.bat`, `run_icarus.ps1`: reproducible run entry points.
 - `.github/workflows/iverilog.yml`: CI simulation on push/PR.
 - `docs/images/`: architecture diagrams.
+
+## Community and Process
+
+- [Contributing Guide](CONTRIBUTING.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Security Policy](SECURITY.md)
+- [Citation Metadata](CITATION.cff)
+- [Reproducibility Guide](docs/REPRODUCIBILITY.md)
+- [Benchmark Plan](docs/BENCHMARK_PLAN.md)
 
 ## Publication
 
