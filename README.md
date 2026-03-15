@@ -6,8 +6,11 @@
 [![HDL](https://img.shields.io/badge/HDL-Verilog-orange)](#)
 [![CI](https://img.shields.io/badge/CI-Icarus%20Verilog-black)](.github/workflows/iverilog.yml)
 [![Hygiene](https://img.shields.io/badge/Repo-Hygiene-blue)](.github/workflows/repo-hygiene.yml)
+[![Website](https://img.shields.io/badge/Website-GitHub%20Pages-1f7a8c)](https://siddheshuttarwar.github.io/vedic-multiplier-brent-kung-rtl/)
 
 A compact, research-backed RTL implementation of an **8x8 unsigned Vedic multiplier** using the **Urdhva Tiryagbhyam** method and **Brent-Kung prefix addition** for improved speed.
+
+Live project site: <https://siddheshuttarwar.github.io/vedic-multiplier-brent-kung-rtl/>
 
 ## Why This Project Matters
 

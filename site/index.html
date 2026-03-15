@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>8-bit Vedic Multiplier + Brent-Kung</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+    <header class="hero">
+      <p class="tag">IEEE-published project</p>
+      <h1>8-bit Vedic Multiplier using Brent-Kung Adders</h1>
+      <p class="sub">
+        Research-backed RTL implementation with exhaustive 65,536-vector verification, designed for fast carry
+        handling using Brent-Kung prefix logic.
+      </p>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/SiddheshUttarwar/vedic-multiplier-brent-kung-rtl">View Source</a>
+        <a class="btn ghost" href="https://ieeexplore.ieee.org/document/9984591">IEEE Paper</a>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2>Architecture</h2>
+        <p>Hierarchical 2-bit to 8-bit Vedic decomposition with Brent-Kung and carry-propagate merge stages.</p>
+      </section>
+      <section class="card">
+        <h2>Verification</h2>
+        <p>Self-checking exhaustive testbench validates all input combinations (`256 x 256`).</p>
+      </section>
+      <section class="card">
+        <h2>Simulation</h2>
+        <p class="mono">make run<br>run_icarus.bat<br>run_icarus.ps1</p>
+      </section>
+      <section class="card">
+        <h2>Reported delay</h2>
+        <p>Published comparison reports the proposed architecture at 7.762 ns in the cited work.</p>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <span>Designed for reproducible RTL experimentation.</span>
+      <span>MIT License for source code.</span>
+    </footer>
+  </body>
+</html>
