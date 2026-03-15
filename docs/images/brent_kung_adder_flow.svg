@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="520" viewBox="0 0 1100 520">
+  <defs>
+    <style>
+      .title { font: 700 30px 'Segoe UI', Arial, sans-serif; fill: #15283b; }
+      .label { font: 600 18px 'Segoe UI', Arial, sans-serif; fill: #12314f; }
+      .small { font: 500 15px 'Segoe UI', Arial, sans-serif; fill: #1b3e64; }
+      .box1 { fill: #ecf5ff; stroke: #2c5f90; stroke-width: 2; rx: 10; ry: 10; }
+      .box2 { fill: #eefbef; stroke: #2f7d34; stroke-width: 2; rx: 10; ry: 10; }
+      .box3 { fill: #fff7e8; stroke: #b67729; stroke-width: 2; rx: 10; ry: 10; }
+      .arrow { stroke: #214a73; stroke-width: 2.5; marker-end: url(#m); fill: none; }
+    </style>
+    <marker id="m" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#214a73"/>
+    </marker>
+  </defs>
+
+  <text x="550" y="52" text-anchor="middle" class="title">Brent-Kung Adder Dataflow (16-bit Module)</text>
+
+  <rect x="50" y="160" width="210" height="90" class="box3"/>
+  <text x="155" y="198" text-anchor="middle" class="label">Inputs</text>
+  <text x="155" y="224" text-anchor="middle" class="small">A[15:0], B[15:0], Cin</text>
+
+  <rect x="320" y="160" width="220" height="90" class="box1"/>
+  <text x="430" y="198" text-anchor="middle" class="label">pg16</text>
+  <text x="430" y="224" text-anchor="middle" class="small">Generate/Propagate pairs</text>
+
+  <rect x="600" y="90" width="220" height="90" class="box2"/>
+  <text x="710" y="128" text-anchor="middle" class="label">Prefix Tree</text>
+  <text x="710" y="154" text-anchor="middle" class="small">BlackCell + GrayCell rows</text>
+
+  <rect x="600" y="230" width="220" height="90" class="box2"/>
+  <text x="710" y="268" text-anchor="middle" class="label">Carry Network</text>
+  <text x="710" y="294" text-anchor="middle" class="small">Grouped carry resolution</text>
+
+  <rect x="880" y="160" width="180" height="90" class="box1"/>
+  <text x="970" y="198" text-anchor="middle" class="label">xor16</text>
+  <text x="970" y="224" text-anchor="middle" class="small">Sum = P xor Carry</text>
+
+  <rect x="880" y="300" width="180" height="90" class="box3"/>
+  <text x="970" y="338" text-anchor="middle" class="label">Outputs</text>
+  <text x="970" y="364" text-anchor="middle" class="small">S[15:0], Cout</text>
+
+  <path d="M260 205 L320 205" class="arrow"/>
+  <path d="M540 205 L600 135" class="arrow"/>
+  <path d="M540 205 L600 275" class="arrow"/>
+  <path d="M820 135 L880 205" class="arrow"/>
+  <path d="M820 275 L880 205" class="arrow"/>
+  <path d="M820 275 L880 345" class="arrow"/>
+  <path d="M1060 205 L1060 345" class="arrow"/>
+</svg>

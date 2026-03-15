@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <defs>
+    <style>
+      .title { font: 700 30px 'Segoe UI', Arial, sans-serif; fill: #10243e; }
+      .label { font: 600 18px 'Segoe UI', Arial, sans-serif; fill: #0f2948; }
+      .small { font: 500 15px 'Segoe UI', Arial, sans-serif; fill: #18385e; }
+      .box { fill: #eaf4ff; stroke: #2a5d90; stroke-width: 2; rx: 10; ry: 10; }
+      .io { fill: #fff6e9; stroke: #b56d1f; stroke-width: 2; rx: 8; ry: 8; }
+      .sum { fill: #edfbea; stroke: #2e7d32; stroke-width: 2; rx: 10; ry: 10; }
+      .arrow { stroke: #1e446e; stroke-width: 2.5; marker-end: url(#m); fill: none; }
+    </style>
+    <marker id="m" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#1e446e"/>
+    </marker>
+  </defs>
+
+  <text x="600" y="50" text-anchor="middle" class="title">8-bit Vedic Multiplier with Brent-Kung Adders</text>
+
+  <rect x="40" y="110" width="170" height="70" class="io"/>
+  <text x="125" y="152" text-anchor="middle" class="label">A[7:0]</text>
+
+  <rect x="40" y="220" width="170" height="70" class="io"/>
+  <text x="125" y="262" text-anchor="middle" class="label">B[7:0]</text>
+
+  <rect x="290" y="85" width="210" height="95" class="box"/>
+  <text x="395" y="122" text-anchor="middle" class="label">vedic4bit #1</text>
+  <text x="395" y="148" text-anchor="middle" class="small">A[3:0] x B[3:0] = vd1</text>
+
+  <rect x="290" y="205" width="210" height="95" class="box"/>
+  <text x="395" y="242" text-anchor="middle" class="label">vedic4bit #2</text>
+  <text x="395" y="268" text-anchor="middle" class="small">A[7:4] x B[3:0] = vd2</text>
+
+  <rect x="290" y="325" width="210" height="95" class="box"/>
+  <text x="395" y="362" text-anchor="middle" class="label">vedic4bit #3</text>
+  <text x="395" y="388" text-anchor="middle" class="small">A[3:0] x B[7:4] = vd3</text>
+
+  <rect x="290" y="445" width="210" height="95" class="box"/>
+  <text x="395" y="482" text-anchor="middle" class="label">vedic4bit #4</text>
+  <text x="395" y="508" text-anchor="middle" class="small">A[7:4] x B[7:4] = vd4</text>
+
+  <rect x="620" y="170" width="240" height="95" class="sum"/>
+  <text x="740" y="207" text-anchor="middle" class="label">Adder Stage 1</text>
+  <text x="740" y="233" text-anchor="middle" class="small">Brent-Kung: vd2 + vd3</text>
+
+  <rect x="620" y="300" width="240" height="95" class="sum"/>
+  <text x="740" y="337" text-anchor="middle" class="label">Adder Stage 2</text>
+  <text x="740" y="363" text-anchor="middle" class="small">Carry-Propagate / BKA mix</text>
+
+  <rect x="620" y="430" width="240" height="95" class="sum"/>
+  <text x="740" y="467" text-anchor="middle" class="label">Adder Stage 3</text>
+  <text x="740" y="493" text-anchor="middle" class="small">Brent-Kung for MSBs</text>
+
+  <rect x="980" y="280" width="170" height="90" class="io"/>
+  <text x="1065" y="320" text-anchor="middle" class="label">M[15:0]</text>
+
+  <path d="M210 145 L290 135" class="arrow"/>
+  <path d="M210 145 L290 255" class="arrow"/>
+  <path d="M210 145 L290 375" class="arrow"/>
+  <path d="M210 145 L290 495" class="arrow"/>
+
+  <path d="M210 255 L290 135" class="arrow"/>
+  <path d="M210 255 L290 255" class="arrow"/>
+  <path d="M210 255 L290 375" class="arrow"/>
+  <path d="M210 255 L290 495" class="arrow"/>
+
+  <path d="M500 252 L620 217" class="arrow"/>
+  <path d="M500 372 L620 217" class="arrow"/>
+  <path d="M500 132 L620 347" class="arrow"/>
+  <path d="M500 492 L620 347" class="arrow"/>
+  <path d="M500 492 L620 477" class="arrow"/>
+
+  <path d="M860 217 L980 325" class="arrow"/>
+  <path d="M860 347 L980 325" class="arrow"/>
+  <path d="M860 477 L980 325" class="arrow"/>
+</svg>

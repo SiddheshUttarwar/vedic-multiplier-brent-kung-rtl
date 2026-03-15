@@ -1,68 +1,96 @@
-# ⚡ Design of High-Speed 8-bit Vedic Multiplier using Brent Kung Adder  
+# Design of High-Speed 8-bit Vedic Multiplier using Brent-Kung Adders
 
-[![IEEE Paper](https://img.shields.io/badge/IEEE-Published-blue)](https://ieeexplore.ieee.org/document/9984591)  
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)  
-[![Language](https://img.shields.io/badge/Verilog-HDL-orange)]()  
-[![Tool](https://img.shields.io/badge/Simulation-Vivado%2014.7-blue)]()  
+[![IEEE Paper](https://img.shields.io/badge/IEEE-Published-blue)](https://ieeexplore.ieee.org/document/9984591)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Language](https://img.shields.io/badge/Language-Verilog-orange)](#)
+[![Simulation](https://img.shields.io/badge/Simulation-Icarus_Verilog-blue)](#simulation-with-icarus-verilog)
 
----
+## Overview
 
-## 📖 Abstract  
+This repository implements an RTL 8x8 unsigned Vedic multiplier using the Urdhva Tiryagbhyam method and Brent-Kung based addition stages for fast carry handling.
 
-Multiplication is a critical operation in **Digital Signal Processing (DSP) systems**.  
-This project implements a **high-speed 8-bit Vedic Multiplier** using the **Urdhva Tiryagbhyam algorithm** from Vedic mathematics, optimized with a **Brent Kung Adder (BKA)** for fast carry computation.  
+The design is based on the published paper:
 
-✅ Reduced **delay, complexity, and area** compared to Array, Dadda, Wallace, and Ripple-Carry-based multipliers.  
-✅ Designed in **Verilog HDL** and simulated on **Xilinx Vivado 14.7**.  
-✅ Outperforms existing multipliers in **speed and efficiency**.  
+- `Design of High-Speed 8-bit Vedic Multiplier using Brent Kung Adders`
+- 13th ICCCNT 2022, IEEE
+- DOI: `10.1109/ICCCNT54827.2022.9984591`
 
----
+## Architecture
 
-## 🏗️ Architecture  
+### Top-level composition
 
-- Uses **Urdhva Tiryagbhyam sutra** for multiplication.  
-- Employs **Brent Kung Parallel Prefix Adders** to reduce propagation delay.  
-- Structure:  
-  - Four 4-bit Vedic Multipliers  
-  - Two 8-bit BKAs + One 4-bit BKA  
-  - AND + OR gates for partial products combination  
+- Four `vedic4bit` blocks generate partial products.
+- Intermediate sums are merged through adder stages using Brent-Kung and carry-propagate addition.
+- Final product output is `M[15:0]`.
 
-📊 **Comparison with Other Multipliers:**  
+![8-bit architecture](docs/images/vedic8_architecture.svg)
 
-| Multiplier              | Logic Levels | Delay (ns) |
-|--------------------------|--------------|------------|
-| Array Multiplier         | 19           | 12.934     |
-| Dadda Multiplier         | 16           | 9.745      |
-| Wallace Tree Multiplier  | 12           | 7.815      |
-| Existed Vedic Multiplier | 15           | 9.130      |
-| **Proposed (This Work)** | **13**       | **7.762**  |
+### Brent-Kung adder role
 
----
+- `pg16.v` computes generate/propagate pairs.
+- `BlackCell.v` and `GrayCell.v` build the prefix tree.
+- `xor16.v` produces final sums from carry and propagate signals.
 
-## 🔬 Results  
+![Brent-Kung flow](docs/images/brent_kung_adder_flow.svg)
 
-- RTL schematic and simulation waveforms verified in **Vivado 14.7**.  
-- Achieved **higher speed** with reduced **logic levels** compared to conventional multipliers.  
+## Reported Results (from paper)
 
-**Simulation Output Example:**  
+| Multiplier | Logic Levels | Delay (ns) |
+|---|---:|---:|
+| Array Multiplier | 19 | 12.934 |
+| Dadda Multiplier | 16 | 9.745 |
+| Wallace Tree Multiplier | 12 | 7.815 |
+| Existing Vedic Multiplier | 15 | 9.130 |
+| Proposed Vedic + Brent-Kung | 13 | 7.762 |
 
-**RTL Schematic for Proposed 8*8 Vedic Multiplier**
-<img width="806" height="391" alt="image" src="https://github.com/user-attachments/assets/452ffa4f-3361-48e3-95f8-8fa85a562e87" />
+## Repository Layout
 
-**Simulation Waveform of Proposed 8*8 Vedic Multiplier**
-<img width="686" height="81" alt="image" src="https://github.com/user-attachments/assets/152f09a3-2295-43ec-978d-a37f0f088d45" />
+- `vedic8bit.v`: Top-level 8x8 multiplier.
+- `vedic4bit.v`, `vedic2bit.v`: Hierarchical Vedic multiplier blocks.
+- `BrentKung.v`, `pg16.v`, `BlackCell.v`, `GrayCell.v`, `xor16.v`: Prefix adder implementation.
+- `compat_primitives.v`: Compatibility primitives required by original RTL (`andg`, `org`, `fulladder`, `carryPropAdder`).
+- `tb/tb_vedic8bit.v`: Self-checking exhaustive testbench (all 65,536 input vectors).
+- `rtl_sources.f`: Icarus file list.
+- `run_icarus.ps1`: Windows PowerShell simulation script.
+- `run_icarus.bat`: Windows Command Prompt simulation script.
+- `docs/images/`: Local architecture diagrams.
 
-**Comparision of the proposed 8 x 8 Vedic Multiplier with other multipliers**
-<img width="663" height="378" alt="image" src="https://github.com/user-attachments/assets/a8d5a4c4-79e9-4551-85e3-f13bfbcadb62" />
+## Simulation with Icarus Verilog
 
+### Linux/macOS (Make)
 
----
+```bash
+make run
+```
 
-## 📄 Publication  
+### Windows (Command Prompt)
 
-This work was presented at the **13th International Conference on Computing Communication and Networking Technologies (ICCCNT 2022)** and published by **IEEE**.   <a href="https://ieeexplore.ieee.org/document/9984591">Link</a>
+```bat
+run_icarus.bat
+```
 
-📑 Citation (BibTeX):  
+### Windows (PowerShell)
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\run_icarus.ps1
+```
+
+### Expected terminal output
+
+```text
+PASS: all 65536 vectors matched.
+```
+
+### Waveform
+
+Simulation generates `wave.vcd` for viewing in GTKWave or any VCD viewer.
+
+## Notes
+
+- In this update session, `iverilog` was not installed in the execution environment, so simulation could not be executed here.
+- The provided testbench and run scripts are ready to run locally once Icarus Verilog is installed and on `PATH`.
+
+## Citation
 
 ```bibtex
 @inproceedings{uttarwar2022vedic,
@@ -73,3 +101,4 @@ This work was presented at the **13th International Conference on Computing Comm
   publisher = {IEEE},
   doi       = {10.1109/ICCCNT54827.2022.9984591}
 }
+```
