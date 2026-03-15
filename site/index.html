@@ -3,50 +3,138 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>8-bit Vedic Multiplier + Brent-Kung</title>
+    <title>8-bit Vedic Multiplier using Brent-Kung Adders</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <div class="bg-orb orb-a"></div>
-    <div class="bg-orb orb-b"></div>
     <header class="hero">
-      <p class="tag">IEEE-published project</p>
-      <h1>8-bit Vedic Multiplier using Brent-Kung Adders</h1>
-      <p class="sub">
-        Research-backed RTL implementation with exhaustive 65,536-vector verification, designed for fast carry
-        handling using Brent-Kung prefix logic.
-      </p>
+      <p class="tag">IEEE Published Work</p>
+      <h1>Design of High-Speed 8-bit Vedic Multiplier using Brent-Kung Adders</h1>
+      <p class="sub">This page explains the full paper in simple language, then shows how to reproduce the design and results from this repository.</p>
       <div class="actions">
-        <a class="btn primary" href="https://github.com/SiddheshUttarwar/vedic-multiplier-brent-kung-rtl">View Source</a>
-        <a class="btn ghost" href="https://ieeexplore.ieee.org/document/9984591">IEEE Paper</a>
+        <a class="btn primary" href="https://ieeexplore.ieee.org/document/9984591">Read IEEE Paper</a>
+        <a class="btn ghost" href="https://github.com/SiddheshUttarwar/vedic-multiplier-brent-kung-rtl">Open GitHub Repo</a>
       </div>
     </header>
 
-    <main class="grid">
-      <section class="card">
-        <h2>Architecture</h2>
-        <p>Hierarchical 2-bit to 8-bit Vedic decomposition with Brent-Kung and carry-propagate merge stages.</p>
+    <main class="wrap">
+      <section class="panel">
+        <h2>Paper in 60 Seconds</h2>
+        <ul>
+          <li><strong>Goal:</strong> make 8-bit multiplication faster for DSP-style hardware.</li>
+          <li><strong>Main idea:</strong> use Urdhva Tiryagbhyam (Vedic multiplication) plus Brent-Kung adder stages.</li>
+          <li><strong>Why it helps:</strong> less carry-delay impact in key merge points.</li>
+          <li><strong>Reported outcome:</strong> lower delay than several classical architectures in the published comparison table.</li>
+        </ul>
       </section>
-      <section class="card">
-        <h2>Verification</h2>
-        <p>Self-checking exhaustive testbench validates all input combinations (`256 x 256`).</p>
+
+      <section class="panel cols2">
+        <article>
+          <h2>Problem the Paper Solves</h2>
+          <p>Multipliers are on the critical path in many digital systems. If multiplication is slow, the whole datapath slows down. The paper focuses on reducing multiplier delay while keeping hardware complexity practical.</p>
+        </article>
+        <article>
+          <h2>What "Vedic" Means Here</h2>
+          <p>The design uses a vertical-and-crosswise multiplication pattern (Urdhva Tiryagbhyam). In practice, this enables parallel partial-product generation, which is a good fit for RTL hierarchy.</p>
+        </article>
       </section>
-      <section class="card">
-        <h2>Simulation</h2>
-        <p class="mono">make run<br>run_icarus.bat<br>run_icarus.ps1</p>
+
+      <section class="panel">
+        <h2>How the Architecture Works (Simple Steps)</h2>
+        <ol>
+          <li>Split each 8-bit input into high and low 4-bit halves.</li>
+          <li>Compute four 4-bit Vedic products in parallel.</li>
+          <li>Add cross-products with a Brent-Kung based stage.</li>
+          <li>Merge middle bits with carry-aware adder logic.</li>
+          <li>Resolve upper bits with another Brent-Kung stage.</li>
+          <li>Assemble final 16-bit product.</li>
+        </ol>
       </section>
-      <section class="card">
-        <h2>Reported delay</h2>
-        <p>Published comparison reports the proposed architecture at 7.762 ns in the cited work.</p>
+
+      <section class="panel">
+        <h2>Reported Results from the Published Paper</h2>
+        <p>The table below mirrors the comparison values reported in the publication.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Multiplier</th>
+                <th>Logic Levels</th>
+                <th>Delay (ns)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Array Multiplier</td>
+                <td>19</td>
+                <td>12.934</td>
+              </tr>
+              <tr>
+                <td>Dadda Multiplier</td>
+                <td>16</td>
+                <td>9.745</td>
+              </tr>
+              <tr>
+                <td>Wallace Tree Multiplier</td>
+                <td>12</td>
+                <td>7.815</td>
+              </tr>
+              <tr>
+                <td>Existing Vedic Multiplier</td>
+                <td>15</td>
+                <td>9.130</td>
+              </tr>
+              <tr class="highlight">
+                <td>Proposed Vedic + Brent-Kung</td>
+                <td>13</td>
+                <td>7.762</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel cols2">
+        <article>
+          <h2>What Is Included in This Repo</h2>
+          <ul>
+            <li>Complete RTL hierarchy (`vedic2bit` to `vedic8bit`).</li>
+            <li>Brent-Kung adder implementation and support blocks.</li>
+            <li>Self-checking exhaustive testbench (65,536 vectors).</li>
+            <li>Icarus simulation flow, CI checks, and documentation.</li>
+          </ul>
+        </article>
+        <article>
+          <h2>How to Reproduce</h2>
+          <p class="mono">make run</p>
+          <p class="mono">run_icarus.bat</p>
+          <p class="mono">run_icarus.ps1</p>
+          <p>Expected summary: <strong>PASS: all 65536 vectors matched.</strong></p>
+        </article>
+      </section>
+
+      <section class="panel cols2">
+        <article>
+          <h2>Publication Details</h2>
+          <ul>
+            <li><strong>Conference:</strong> ICCCNT 2022</li>
+            <li><strong>Publisher:</strong> IEEE</li>
+            <li><strong>DOI:</strong> 10.1109/ICCCNT54827.2022.9984591</li>
+          </ul>
+        </article>
+        <article>
+          <h2>For New Readers</h2>
+          <p>If you are not from VLSI background: think of this as a design that combines a fast multiplication pattern with a fast carry-resolution strategy, and then proves correctness by exhaustive simulation.</p>
+        </article>
       </section>
     </main>
 
     <footer class="foot">
-      <span>Designed for reproducible RTL experimentation.</span>
-      <span>MIT License for source code.</span>
+      <span>Source code: MIT licensed.</span>
+      <span>Paper content: summarized for educational use; refer IEEE paper for full text.</span>
     </footer>
   </body>
 </html>
