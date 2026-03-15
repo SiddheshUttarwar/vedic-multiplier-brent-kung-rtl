@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>8-bit Vedic Multiplier using Brent-Kung Adders</title>
+    <title>Paper Explainer: 8-bit Vedic Multiplier using Brent-Kung Adders</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -11,52 +11,66 @@
   </head>
   <body>
     <header class="hero">
-      <p class="tag">IEEE Published Work</p>
+      <p class="tag">Paper-First Technical Explainer</p>
       <h1>Design of High-Speed 8-bit Vedic Multiplier using Brent-Kung Adders</h1>
-      <p class="sub">This page explains the full paper in simple language, then shows how to reproduce the design and results from this repository.</p>
+      <p class="sub">This page follows the structure of the published IEEE work and explains each part in language that non-VLSI readers can follow.</p>
       <div class="actions">
-        <a class="btn primary" href="https://ieeexplore.ieee.org/document/9984591">Read IEEE Paper</a>
-        <a class="btn ghost" href="https://github.com/SiddheshUttarwar/vedic-multiplier-brent-kung-rtl">Open GitHub Repo</a>
+        <a class="btn primary" href="https://ieeexplore.ieee.org/document/9984591">Published Paper</a>
+        <a class="btn ghost" href="https://github.com/SiddheshUttarwar/vedic-multiplier-brent-kung-rtl">Repository</a>
       </div>
     </header>
 
     <main class="wrap">
       <section class="panel">
-        <h2>Paper in 60 Seconds</h2>
-        <ul>
-          <li><strong>Goal:</strong> make 8-bit multiplication faster for DSP-style hardware.</li>
-          <li><strong>Main idea:</strong> use Urdhva Tiryagbhyam (Vedic multiplication) plus Brent-Kung adder stages.</li>
-          <li><strong>Why it helps:</strong> less carry-delay impact in key merge points.</li>
-          <li><strong>Reported outcome:</strong> lower delay than several classical architectures in the published comparison table.</li>
-        </ul>
+        <h2>Abstract (Plain Language)</h2>
+        <p>The work proposes a faster 8-bit multiplier by combining Vedic multiplication (for parallel partial-product generation) with Brent-Kung adder stages (for efficient carry handling). The target is lower propagation delay without excessive hardware complexity.</p>
       </section>
 
       <section class="panel cols2">
         <article>
-          <h2>Problem the Paper Solves</h2>
-          <p>Multipliers are on the critical path in many digital systems. If multiplication is slow, the whole datapath slows down. The paper focuses on reducing multiplier delay while keeping hardware complexity practical.</p>
+          <h2>1) Research Problem</h2>
+          <p>In DSP and arithmetic datapaths, multiplication often limits clock speed. Traditional architectures can become slow because of carry propagation and deeper logic paths.</p>
         </article>
         <article>
-          <h2>What "Vedic" Means Here</h2>
-          <p>The design uses a vertical-and-crosswise multiplication pattern (Urdhva Tiryagbhyam). In practice, this enables parallel partial-product generation, which is a good fit for RTL hierarchy.</p>
+          <h2>2) Proposed Idea</h2>
+          <p>Use Urdhva Tiryagbhyam decomposition for multiplication and place Brent-Kung adder logic on key merge paths so carry depth is reduced where it matters most.</p>
         </article>
       </section>
 
       <section class="panel">
-        <h2>How the Architecture Works (Simple Steps)</h2>
+        <h2>3) Methodology from the Paper</h2>
         <ol>
-          <li>Split each 8-bit input into high and low 4-bit halves.</li>
+          <li>Split both 8-bit operands into 4-bit halves.</li>
           <li>Compute four 4-bit Vedic products in parallel.</li>
-          <li>Add cross-products with a Brent-Kung based stage.</li>
-          <li>Merge middle bits with carry-aware adder logic.</li>
-          <li>Resolve upper bits with another Brent-Kung stage.</li>
-          <li>Assemble final 16-bit product.</li>
+          <li>Combine cross terms using a Brent-Kung driven adder stage.</li>
+          <li>Merge middle bits with carry-aware addition.</li>
+          <li>Resolve upper product bits through final adder stage.</li>
+          <li>Produce the final 16-bit multiplication output.</li>
         </ol>
       </section>
 
+      <section class="panel cols2">
+        <article>
+          <h2>4) Experimental Setup (Published)</h2>
+          <ul>
+            <li>Design entry: Verilog HDL.</li>
+            <li>Simulation/synthesis context in paper: Xilinx Vivado 14.7.</li>
+            <li>Comparison set: Array, Dadda, Wallace Tree, and existing Vedic multiplier variants.</li>
+          </ul>
+        </article>
+        <article>
+          <h2>5) Architecture in This Repo</h2>
+          <ul>
+            <li>Hierarchy from `vedic2bit` up to `vedic8bit`.</li>
+            <li>Prefix adder cells: `BlackCell`, `GrayCell`, `pg16`, `xor16`.</li>
+            <li>Exhaustive self-checking testbench for full 8-bit input space.</li>
+          </ul>
+        </article>
+      </section>
+
       <section class="panel">
-        <h2>Reported Results from the Published Paper</h2>
-        <p>The table below mirrors the comparison values reported in the publication.</p>
+        <h2>6) Reported Results from the Published Paper</h2>
+        <p>Numbers below are the published comparison values.</p>
         <div class="table-wrap">
           <table>
             <thead>
@@ -67,31 +81,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Array Multiplier</td>
-                <td>19</td>
-                <td>12.934</td>
-              </tr>
-              <tr>
-                <td>Dadda Multiplier</td>
-                <td>16</td>
-                <td>9.745</td>
-              </tr>
-              <tr>
-                <td>Wallace Tree Multiplier</td>
-                <td>12</td>
-                <td>7.815</td>
-              </tr>
-              <tr>
-                <td>Existing Vedic Multiplier</td>
-                <td>15</td>
-                <td>9.130</td>
-              </tr>
-              <tr class="highlight">
-                <td>Proposed Vedic + Brent-Kung</td>
-                <td>13</td>
-                <td>7.762</td>
-              </tr>
+              <tr><td>Array Multiplier</td><td>19</td><td>12.934</td></tr>
+              <tr><td>Dadda Multiplier</td><td>16</td><td>9.745</td></tr>
+              <tr><td>Wallace Tree Multiplier</td><td>12</td><td>7.815</td></tr>
+              <tr><td>Existing Vedic Multiplier</td><td>15</td><td>9.130</td></tr>
+              <tr class="highlight"><td>Proposed Vedic + Brent-Kung</td><td>13</td><td>7.762</td></tr>
             </tbody>
           </table>
         </div>
@@ -99,16 +93,11 @@
 
       <section class="panel cols2">
         <article>
-          <h2>What Is Included in This Repo</h2>
-          <ul>
-            <li>Complete RTL hierarchy (`vedic2bit` to `vedic8bit`).</li>
-            <li>Brent-Kung adder implementation and support blocks.</li>
-            <li>Self-checking exhaustive testbench (65,536 vectors).</li>
-            <li>Icarus simulation flow, CI checks, and documentation.</li>
-          </ul>
+          <h2>7) What This Means for Non-Experts</h2>
+          <p>Lower delay means the arithmetic block can potentially run at a higher clock frequency. The proposed design seeks this speed gain while keeping logic depth and complexity controlled.</p>
         </article>
         <article>
-          <h2>How to Reproduce</h2>
+          <h2>8) Reproduce the Design</h2>
           <p class="mono">make run</p>
           <p class="mono">run_icarus.bat</p>
           <p class="mono">run_icarus.ps1</p>
@@ -116,25 +105,17 @@
         </article>
       </section>
 
-      <section class="panel cols2">
-        <article>
-          <h2>Publication Details</h2>
-          <ul>
-            <li><strong>Conference:</strong> ICCCNT 2022</li>
-            <li><strong>Publisher:</strong> IEEE</li>
-            <li><strong>DOI:</strong> 10.1109/ICCCNT54827.2022.9984591</li>
-          </ul>
-        </article>
-        <article>
-          <h2>For New Readers</h2>
-          <p>If you are not from VLSI background: think of this as a design that combines a fast multiplication pattern with a fast carry-resolution strategy, and then proves correctness by exhaustive simulation.</p>
-        </article>
+      <section class="panel">
+        <h2>9) Publication Reference</h2>
+        <p><strong>Conference:</strong> ICCCNT 2022, IEEE</p>
+        <p><strong>DOI:</strong> 10.1109/ICCCNT54827.2022.9984591</p>
+        <p>This site is an educational interpretation of the published work; use the IEEE paper for the official full technical record.</p>
       </section>
     </main>
 
     <footer class="foot">
       <span>Source code: MIT licensed.</span>
-      <span>Paper content: summarized for educational use; refer IEEE paper for full text.</span>
+      <span>Paper content summarized for accessibility and learning.</span>
     </footer>
   </body>
 </html>
