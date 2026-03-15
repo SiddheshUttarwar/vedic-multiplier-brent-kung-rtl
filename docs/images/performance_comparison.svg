@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="560" viewBox="0 0 1100 560">
+  <defs>
+    <style>
+      .title { font: 700 30px 'Segoe UI', Arial, sans-serif; fill: #13283f; }
+      .axis { stroke: #244a72; stroke-width: 2; }
+      .tick { stroke: #50739a; stroke-width: 1; }
+      .label { font: 600 14px 'Segoe UI', Arial, sans-serif; fill: #1a3f64; }
+      .value { font: 700 13px 'Segoe UI', Arial, sans-serif; fill: #0f2d4a; }
+      .note { font: 500 13px 'Segoe UI', Arial, sans-serif; fill: #2c5f90; }
+    </style>
+  </defs>
+
+  <text x="550" y="42" text-anchor="middle" class="title">Delay Comparison (Reported in IEEE Paper)</text>
+  <text x="550" y="66" text-anchor="middle" class="note">Lower is better. Values are reported in nanoseconds (ns).</text>
+
+  <!-- Chart area -->
+  <rect x="110" y="90" width="870" height="390" fill="#f7fbff" stroke="#d2e3f3"/>
+  <line x1="170" y1="450" x2="930" y2="450" class="axis"/>
+  <line x1="170" y1="120" x2="170" y2="450" class="axis"/>
+
+  <!-- Y ticks -->
+  <line x1="165" y1="450" x2="930" y2="450" class="tick"/>
+  <text x="135" y="455" class="label">0</text>
+  <line x1="165" y1="394" x2="930" y2="394" class="tick"/>
+  <text x="127" y="399" class="label">2</text>
+  <line x1="165" y1="338" x2="930" y2="338" class="tick"/>
+  <text x="127" y="343" class="label">4</text>
+  <line x1="165" y1="282" x2="930" y2="282" class="tick"/>
+  <text x="127" y="287" class="label">6</text>
+  <line x1="165" y1="226" x2="930" y2="226" class="tick"/>
+  <text x="127" y="231" class="label">8</text>
+  <line x1="165" y1="170" x2="930" y2="170" class="tick"/>
+  <text x="120" y="175" class="label">10</text>
+  <line x1="165" y1="114" x2="930" y2="114" class="tick"/>
+  <text x="120" y="119" class="label">12</text>
+
+  <!-- Bars (scale: 1ns = 28px) -->
+  <!-- Array: 12.934 -->
+  <rect x="215" y="88" width="90" height="362" fill="#8db9e3"/>
+  <text x="260" y="468" text-anchor="middle" class="label">Array</text>
+  <text x="260" y="80" text-anchor="middle" class="value">12.934</text>
+
+  <!-- Dadda: 9.745 -->
+  <rect x="345" y="177" width="90" height="273" fill="#78a8d8"/>
+  <text x="390" y="468" text-anchor="middle" class="label">Dadda</text>
+  <text x="390" y="169" text-anchor="middle" class="value">9.745</text>
+
+  <!-- Wallace: 7.815 -->
+  <rect x="475" y="231" width="90" height="219" fill="#5f97cb"/>
+  <text x="520" y="468" text-anchor="middle" class="label">Wallace</text>
+  <text x="520" y="223" text-anchor="middle" class="value">7.815</text>
+
+  <!-- Existing Vedic: 9.130 -->
+  <rect x="605" y="194" width="90" height="256" fill="#4d89c0"/>
+  <text x="650" y="468" text-anchor="middle" class="label">Existing Vedic</text>
+  <text x="650" y="186" text-anchor="middle" class="value">9.130</text>
+
+  <!-- Proposed: 7.762 -->
+  <rect x="735" y="233" width="90" height="217" fill="#1f6fb2"/>
+  <text x="780" y="468" text-anchor="middle" class="label">Proposed</text>
+  <text x="780" y="225" text-anchor="middle" class="value">7.762</text>
+
+  <text x="940" y="122" class="note">Source: ICCCNT 2022 (DOI: 10.1109/ICCCNT54827.2022.9984591)</text>
+</svg>

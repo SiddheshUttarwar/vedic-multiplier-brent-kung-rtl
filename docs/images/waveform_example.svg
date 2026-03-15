@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460">
+  <defs>
+    <style>
+      .title { font: 700 28px 'Segoe UI', Arial, sans-serif; fill: #152b45; }
+      .label { font: 600 16px 'Segoe UI', Arial, sans-serif; fill: #1d446a; }
+      .tick { stroke: #54779a; stroke-width: 1; }
+      .grid { stroke: #d8e6f4; stroke-width: 1; }
+      .sigA { fill: none; stroke: #1c7ed6; stroke-width: 3; }
+      .sigB { fill: none; stroke: #2f9e44; stroke-width: 3; }
+      .sigM { fill: none; stroke: #d9480f; stroke-width: 3; }
+      .note { font: 500 13px 'Segoe UI', Arial, sans-serif; fill: #355d84; }
+      .val { font: 700 12px Consolas, monospace; fill: #0f2d4a; }
+    </style>
+  </defs>
+
+  <text x="600" y="38" text-anchor="middle" class="title">Representative Simulation Waveform (8-bit Multiplier)</text>
+  <text x="600" y="60" text-anchor="middle" class="note">Illustrative timing view for A, B, and M = A x B across stimulus steps</text>
+
+  <rect x="110" y="80" width="1030" height="320" fill="#f8fcff" stroke="#cfe0f1"/>
+
+  <!-- Vertical time grid -->
+  <line x1="170" y1="80" x2="170" y2="400" class="tick"/>
+  <line x1="290" y1="80" x2="290" y2="400" class="grid"/>
+  <line x1="410" y1="80" x2="410" y2="400" class="grid"/>
+  <line x1="530" y1="80" x2="530" y2="400" class="grid"/>
+  <line x1="650" y1="80" x2="650" y2="400" class="grid"/>
+  <line x1="770" y1="80" x2="770" y2="400" class="grid"/>
+  <line x1="890" y1="80" x2="890" y2="400" class="grid"/>
+  <line x1="1010" y1="80" x2="1010" y2="400" class="grid"/>
+  <line x1="1130" y1="80" x2="1130" y2="400" class="tick"/>
+
+  <!-- Horizontal lanes -->
+  <line x1="110" y1="150" x2="1140" y2="150" class="grid"/>
+  <line x1="110" y1="240" x2="1140" y2="240" class="grid"/>
+  <line x1="110" y1="330" x2="1140" y2="330" class="grid"/>
+
+  <text x="55" y="125" class="label">A[7:0]</text>
+  <text x="55" y="215" class="label">B[7:0]</text>
+  <text x="55" y="305" class="label">M[15:0]</text>
+  <text x="55" y="392" class="label">time</text>
+
+  <!-- A waveform -->
+  <path class="sigA" d="M170 135 L290 135 L290 105 L410 105 L410 135 L530 135 L530 95 L650 95 L650 125 L770 125 L770 100 L890 100 L890 130 L1010 130 L1010 110 L1130 110"/>
+
+  <!-- B waveform -->
+  <path class="sigB" d="M170 225 L290 225 L290 195 L410 195 L410 220 L530 220 L530 185 L650 185 L650 210 L770 210 L770 180 L890 180 L890 205 L1010 205 L1010 190 L1130 190"/>
+
+  <!-- M waveform -->
+  <path class="sigM" d="M170 315 L290 315 L290 278 L410 278 L410 320 L530 320 L530 260 L650 260 L650 305 L770 305 L770 250 L890 250 L890 300 L1010 300 L1010 270 L1130 270"/>
+
+  <!-- Value annotations -->
+  <text x="178" y="98" class="val">0x03</text>
+  <text x="298" y="88" class="val">0x0A</text>
+  <text x="418" y="88" class="val">0x12</text>
+  <text x="538" y="78" class="val">0x2D</text>
+  <text x="658" y="88" class="val">0x40</text>
+  <text x="778" y="78" class="val">0x55</text>
+  <text x="898" y="88" class="val">0x7F</text>
+  <text x="1018" y="88" class="val">0xA1</text>
+
+  <text x="178" y="188" class="val">0x05</text>
+  <text x="298" y="178" class="val">0x07</text>
+  <text x="418" y="178" class="val">0x0C</text>
+  <text x="538" y="168" class="val">0x10</text>
+  <text x="658" y="178" class="val">0x22</text>
+  <text x="778" y="168" class="val">0x2A</text>
+  <text x="898" y="178" class="val">0x33</text>
+  <text x="1018" y="178" class="val">0x40</text>
+
+  <text x="178" y="268" class="val">0x000F</text>
+  <text x="298" y="258" class="val">0x0046</text>
+  <text x="418" y="258" class="val">0x00D8</text>
+  <text x="538" y="248" class="val">0x02D0</text>
+  <text x="658" y="258" class="val">0x0880</text>
+  <text x="778" y="248" class="val">0x0DCA</text>
+  <text x="898" y="258" class="val">0x197D</text>
+  <text x="1018" y="258" class="val">0x2840</text>
+
+  <text x="168" y="392" class="val">t0</text>
+  <text x="288" y="392" class="val">t1</text>
+  <text x="408" y="392" class="val">t2</text>
+  <text x="528" y="392" class="val">t3</text>
+  <text x="648" y="392" class="val">t4</text>
+  <text x="768" y="392" class="val">t5</text>
+  <text x="888" y="392" class="val">t6</text>
+  <text x="1008" y="392" class="val">t7</text>
+</svg>
