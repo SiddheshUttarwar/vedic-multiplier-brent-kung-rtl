@@ -7,7 +7,258 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <style>
+:root {
+  --ink: #1a1a1a;
+  --paper: #fdfdfd;
+  --accent: #1e4b85;
+  --ghost: #f4f6f9;
+  --border: #e0e4e8;
+  --serif: 'Crimson Pro', serif;
+  --sans: 'Inter', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #ccd4db;
+  color: var(--ink);
+  font-family: var(--serif);
+  line-height: 1.6;
+  padding: 40px 20px;
+}
+
+.paper-container {
+  background-color: var(--paper);
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 100px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  min-height: 100vh;
+}
+
+.journal-tag {
+  font-family: var(--sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent);
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--accent);
+  display: inline-block;
+}
+
+.paper-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: #000;
+}
+
+.authors {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.author-block {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.affiliation {
+  font-style: italic;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.paper-metadata {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 3rem;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.paper-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 4rem;
+}
+
+.btn {
+  font-family: var(--sans);
+  text-decoration: none;
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.btn.primary {
+  background: var(--ink);
+  color: white;
+}
+
+.btn.primary:hover {
+  background: #333;
+}
+
+.btn.ghost {
+  border: 1px solid var(--border);
+  color: var(--ink);
+}
+
+.btn.ghost:hover {
+  background: var(--ghost);
+}
+
+.abstract-section {
+  background: var(--ghost);
+  padding: 30px;
+  margin-bottom: 4rem;
+  border-left: 4px solid var(--accent);
+}
+
+.abstract-section .section-title {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.abstract-section p {
+  font-style: italic;
+  text-align: justify;
+}
+
+.section-title {
+  font-family: var(--sans);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 3rem 0 1.5rem;
+  color: var(--accent);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.subsection-title {
+  font-family: var(--sans);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1.5rem 0 1rem;
+}
+
+p, .paper-list li {
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+  text-align: justify;
+}
+
+.paper-list {
+  padding-left: 25px;
+  margin-bottom: 1.5rem;
+}
+
+.figure-box {
+  margin: 3rem 0;
+  padding: 20px;
+  border: 1px solid var(--border);
+  background: white;
+  text-align: center;
+}
+
+.figure-caption {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 15px;
+}
+
+.cols2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.code-panel {
+  background: #282c34;
+  color: #abb2bf;
+  padding: 20px;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  margin: 2rem 0;
+}
+
+.code-panel code {
+  display: block;
+}
+
+.academic-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.academic-table th, .academic-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  font-family: var(--sans);
+}
+
+.academic-table th {
+  background: var(--ghost);
+  font-weight: 700;
+}
+
+.academic-table tr.highlight {
+  background: #f0f7ff;
+  font-weight: 700;
+}
+
+.reference-item {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  text-align: left;
+  padding-left: 2rem;
+  text-indent: -2rem;
+}
+
+.paper-footer {
+  margin-top: 6rem;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  text-align: center;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .paper-container {
+    padding: 40px 20px;
+  }
+  .cols2 {
+    grid-template-columns: 1fr;
+  }
+  .paper-title {
+    font-size: 1.6rem;
+  }
+}
+    </style>
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
